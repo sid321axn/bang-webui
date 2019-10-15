@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="ML Live">
+    <title>Machine Learning Model Live</title>
+
+    <link rel="stylesheet" href="css/foundation.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<style>
+			body  {
+			  background-image: url("home-banner.jpg");
+			  
+			}
+			</style>
+</head>
+
+<body >
+    <div data-sticky-container>
+        <div class="sticky" data-sticky data-options="marginTop:0;" data-sticky-on="small">
+
+            <div class="title-bar" data-responsive-toggle="mainMenu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle="mainMenu"></button>
+                <div class="title-bar-title">Menu</div>
+            </div>
+
+            <div class="top-bar" data-sticky data-options="marginTop:0;" id="mainMenu">
+                <div class="top-bar-left">
+                    <ul class="menu align-left">
+                        <li><a href="#"><font color="white">Welcome to Bengaluru House Price Prediction</font></a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	<div class="bg-image"></div>
+
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            
+          
+        
+
+       
+
+       
+
+
+        <div class="grid-x grid-margin-x" style="padding-top:2%;">
+            <div class="large-12 cell">
+                <h4 id='californaHousing'>Enter Details to Start Predicting ...</h4>
+            </div>
+
+            <div class="large-3 cell">
+                <label>Area Type</label>
+                <div class="input-group">
+
+                    <select class="input-group-field" id="area_type" name="area_type" required>
+                        <option value="0">Carpet Area</option>
+                        <option value="1">PLot Area</option>
+                        <option value="2">Built up Area</option>
+                        <option value="3">Super Built up Area</option>
+                      </select>
+
+                </div>
+
+
+                <label> Availability</label>
+                <div class="input-group">
+                    <select class="input-group-field" id="availability" name="availability" required>
+                        <option value="0">Under Construction</option>
+                        <option value="1">Ready to Move</option>
+
+                      </select>
+                </div>
+            </div>
+
+            <div class="large-3 cell">
+                <label>Balcony</label>
+                <div class="input-group">
+                    <select class="input-group-field" id="balcony" name="balcony" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                </div>
+
+                <label>Bathrooms</label>
+                <div class="input-group">
+                    <select class="input-group-field" id="bath" name="bath" required>
+                       
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                </div>
+            </div>
+
+            <div class="large-3 cell">
+                <label>Pincode</label>
+                <div class="input-group">
+                    <input type="number" class="input-group-field" id="pincode" name="pincode" required>
+                </div>
+
+                <label>Total Sq. Ft.</label>
+                <div class="input-group">
+                    <input type="number" class="input-group-field" id="total_sqft" name="total_sqft" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <div class="large-3 cell">
+                <label>Size in BHK</label>
+                <div class="input-group">
+                    <select class="input-group-field" id="size_BHK" name="size_BHK" required>
+                       
+                        <option value="1">1 BHK</option>
+                        <option value="2">2 BHK</option>
+                        <option value="3">3 BHK</option>
+                        <option value="4">4 BHK</option>
+                        <option value="5">5 BHK</option>
+                        <option value="6">6 BHK</option>
+                      </select>
+                </div>
+
+                <label>No. of Bedrooms</label>
+                <div class="input-group">
+                    <select class="input-group-field" id="size_bed" name="size_bed" required>
+                       
+                        <option value="1">1 Bedroom</option>
+                        <option value="2">2 Bedroom</option>
+                        <option value="3">3 Bedroom</option>
+                        <option value="4">4 Bedroom</option>
+                        <option value="5">5 Bedroom</option>
+                        <option value="6">6 Bedroom</option>
+                      </select>
+                </div>
+            </div>
+
+            <div class="large-3 cell">
+                <input type="button" class="button expanded" value="Predict Price" id="btnPredictHousePrice">
+            </div>
+
+            <div class="large-3 cell">
+                <img src="img/loading_32.gif" id="housingLoader">
+                <div class="input-group" id="predPriceGroup">
+                    <input type="text" class="input-group-field" id="predPrice" placeholder="Predicted price" readonly>
+                    <span class="input-group-label">Rs. in Lacs</span>
+                </div>
+            </div>
+        </div>
+
+      
+
+        <div class="grid-x grid-margin-x align-center" id="chartLoader" style="padding-top:6%;">
+            <div class="small-1 meduim-1 large-1 cell">
+                <img src="img/loading_32.gif">
+            </div>
+        </div>
+
+        <div class="grid-x grid-margin-x align-center">
+            <div class="large-10 cell" style="margin-bottom:20%;">
+                <canvas id="resnetChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/displacy-ent.js"></script>
+    <script src="js/displacy.js"></script>
+    <script src="js/aws-sdk-2.283.1.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
